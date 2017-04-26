@@ -1,0 +1,198 @@
+#+TITLE: Harnack Inequalities and Ancient Solutions
+#+BEAMER_HEADER: \subtitle{Mission Beach\\Joint with Mohammad Ivaki and Julian Scheuer}
+#+AUTHOR: Paul Bryan
+#+EMAIL: pabryan@gmail.com
+#+DATE: May 2017
+
+#+SETUPFILE: ~/.emacs.d/org-templates/bibliography.org
+
+#+OPTIONS: H:2 toc:t
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [presentation]
+#+BEAMER_THEME: Boadilla
+#+LaTeX_HEADER: \AtBeginSection[]{\begin{frame}\frametitle{Table of Contents}\tableofcontents[currentsection]\end{frame}}
+
+#+LaTeX_HEADER: \input{local_definitions}
+
+* Introduction
+** Hypersurface Flows
+- \((N^{n+1}, \bar{g})\) = Riemmanian or Lorentzian Manifold.
+- \(M^n\) = compact manifold (except in Minkowski space - more later)\pause
+- \(M_t = X_t(M)\) is smooth family of embedded hypersurfaces where \(X_t : M \to N\) satisfies
+  \[
+  \partial_t X_t = -F(\mathcal{W}_t) \nu_t
+  \]
+  \pause
+  - \(\mathcal{W}_t\) = Weingarten, \(\nu_t\) = Unit Normal.
+  - \(F\) = /curvature function/ = smooth, symmetric function of principal curvatures (geometric flow), increasing in each argument (parabolic).\pause
+- Assumption: \(M_t\) is /spacelike/: induced metric \(g_t = X_t^{\ast} \bar{g} > 0\). \pause
+- Assumption: strict convexity: 
+  \[
+  h(X, X) := g(\mathcal{W}(X), X) > 0 \quad \forall X \ne 0 \in TM \Leftrightarrow \kappa_i > 0.
+  \]\pause
+- Assumption: \(\abs{F} > 0\) for \(\kappa_i > 0\).
+** Examples of Hypersurface Flows
+- Mean Curvature Flow: \(F(\mathcal{W}) = H = \Tr(\mathcal{W}) = \kappa_1 + \cdots + \kappa_n\).
+- Inverse Mean Curvature Flow: \(F(\mathcal{W}) = -H^{-1} = - \Tr(\mathcal{W})^{-1} = -\frac{1}{\kappa_1 + \cdots + \kappa_n}\).
+- Gauss Curvature Flow: \(F(\mathcal{W}) = K = \Tr(\wedge^n \mathcal{W}) = \kappa_1 \cdots \kappa_n\). \pause
+- Elementary Symmmetric Polynomials: \(F(\mathcal{W}) = \sigma_k = \Tr(\wedge^k \mathcal{W}) = \sum_{i_1 < \cdots < i_k} \kappa_{i_1} \cdots \kappa_{i_k}\).
+- Power sums: \(F(\mathcal{W}) = P_k = \Tr(\mathcal{W}^k) = \kappa_1^k + \cdots + \kappa_n^k\). \pause
+- New functions from old
+  - Take powers: \(H^p\), \(K^p\), \(\sigma_k^p\), etc.
+  - Symmetric polynomials in \(\kappa_i\) = Polynomials in \(\sigma_k\) = Polynomials in \(P_k\)
+  - Transcendental functions, e.g. \(\exp(H)\)
+** Examples of Hypersurface Flow
+- Any smooth function \(f\), increasing in each argument: \(F(\mathcal{W}) = f(\sigma_1, \cdots, \sigma_n)\)
+- Such functions give parabolic flows. \pause
+- For Harnack inequalities (and many other results!) need to assume either
+  - \(f\) is convex,
+  - \(f\) is concave,
+  - \(f\) is inverse concave (i.e. \(\mathcal{W} \mapsto 1/f(\mathcal{W}^{-1})\) is concave. 
+  - \(f = f_1^p\) where \(f_1\) is \(1\)-homogeneous.
+   \pause
+- Remark from classical invariant theory:
+  - A theorem of Weyl says any polynomial function of \(\mathcal{W}\) invariant under change of coordinates must be a polynomial in \(\sigma_k\). Trace is the only invariant, linear polynomial, etc.
+  - Approximating smooth \(F\) by polynomials \(\Rightarrow\) only invariant smooth functions are of the form \(f(\sigma_1, \cdots, \sigma_n)\).
+** Li-Yau-Hamilton and Moser Harnack Inequality
+- Li-Yau-Hamilton (Andrews in this context!):
+  - Let \(u = \partial_t \ln \abs{F}\).
+    \[
+    \partial_t u - \abs{\nabla u}_h^2 \geq -\frac{p}{p+1} \frac{1}{t}
+    \]\pause
+  - \(\abs{\nabla u}_h^2 = h(\grad_h u, \grad_h u)\) where \(du(X) = h(\grad_h u, X)\) defines the gradient of \(u\) w.r.t. \(h\).
+  - \(p\) = homogeneity degree  \pause
+- Moser:
+  \[
+  F(x_1, t_1) \leq C(x_1, x_2, t_1, t_2) F(x_2, t_2)
+  \]
+  with \(0 < t_1 < t_2\). \pause
+- Li-Yau-Hamilton \(\Leftrightarrow\) Moser by integrating over space-time paths. \pause
+- Li-Yau-Hamilton produces sharpest \(C\):
+  \[
+  C = \left(\frac{t_2}{t_1}\right)^{\tfrac{p}{p+1}} e^{\Delta/4}
+  \]
+  - \(\Delta = \inf_{\gamma} \int_{t_1}^{t_2} \tfrac{1}{F} h(\gamma', \gamma') dt\) for \(F > 0\) and \(\gamma(t_1) = x_1, \gamma(t_2) = x_2\).
+  - Replace \(\inf\) by \(\sup\) for \(F < 0\).
+** Why Care About Harnack inequalities?
+- Regularity: e.g. Moser proved divergence form + measurable coefficients \(\Rightarrow\) \holder{} continuity.
+- Bootstrapping: \(C^{k+2}\) coefficients \(\Rightarrow\) \(C^{k,\alpha}\) continuity (morally) \pause
+- Singularity analysis: Blow ups of singularities are solitons (sharp case in the Harnack!) \pause
+- Uniform parabolicity: e.g. GCF \(F = K\).\pause
+  - \(\kappa_i = 0\) for some \(i\) \(\Rightarrow dF = 0 \Rightarrow\) the flow is degenerate parabolic.\pause
+  - Upper bounds for the speed are easiest: \(K \leq K_0(t)\).
+  - Moser Harnack: \(0 \leq \sup_{x\in M} F(x, t_1) \leq C \inf_{x\in M} F(x, t_2)\)
+  - Therefore, if \(\kappa_i = 0\) at \(t = t_2\), then \(F \equiv 0\), \(t \leq t_2\)! (compare strong maximum principle)\pause
+  - Li-Yau-Hamitlon \(\Rightarrow\) convexity is preserved while the flow is smooth:
+    \[
+    t^{-p/(p+1)} \partial_t (t^{p/(p+1)}F) = \partial_t F + \frac{p}{p+1} \frac{1}{t} F \geq \frac{1}{F} \abs{\nabla F}_h^2 \geq 0.
+    \]
+    - Therefore \(t^{p/(p+1)}F\) is increasing and so \(F(\cdot, 0) > 0 \Rightarrow F(\cdot, t) > 0\).
+** Why Care About Ancient Solutions?
+- Ancient solutions exist for \(t \in (-\infty, T)\).\pause
+- Since parabolic equations are smoothing forwards in time, they get worse backwards in time!
+- Only very special solutions extend back to \(-\infty\) and may reflect symmetries of the flow and lend intuition. \pause
+- Blow-ups of singularities produce ancient solutions:
+  - \(\sup_{x\in M} \|A(x, t)\|^2 \to \infty\) as \(t \to T\):\pause
+  - For \(\lambda_k \to \infty\):
+  \[
+  \sqrt{\lambda_k} g(T + \frac{t}{\sqrt{\lambda_k}}) \quad t \in (-\sqrt{\lambda_k} T, 0)
+  \]
+  converges to a an ancient solution as \(k \to \infty\). \pause
+  - Harnack inequality \(\Rightarrow\) the ancient solution is a translating soliton.
+  
+* Harnack Inequalities: The Heat Equation Revisited
+** Li-Yau from Moser 1
+- Moser Harnack: $\operatorname{osc} u = \sup \abs{u(x_1) - u(x_2)} \leq C d(x_1, x_2)^{\alpha}$ is like a gradient bound:
+  \[
+  u(x_2) - u(x_1) = \int_0^1 \partial_s u(\gamma(s)) ds = \int_0^1 g(\grad u, \gamma') ds
+  \]
+  where $\gamma(0) = x_1$, $\gamma(1) = x_2$.
+- $u(x_1, t_1) \leq C u(x_2, t_2)$ iff
+  \[
+  \ln u(x_2, t_2) - \ln u(x_1, t_1) \geq -\ln C
+  \]
+- \[
+  \ln u(x_2, t_2) - \ln u(x_1, t_1) = \int_{t_1}^{t_2} \partial_t \ln u(\gamma(t), t) dt
+  \]
+  where $\gamma(t_1) = x_1$ and $\gamma(t_2) = x_2$.
+- \[
+  \partial_t \ln u(\gamma(t), t) = \partial_t \ln u + d\ln u \cdot \gamma'
+  \]
+  and pointwise estimate will be sharpest!
+** Li Yau from Moser 2: Sharp estimates
+- Separate $\grad \ln u$ and $\gamma'$ parts.
+- Let $f = f$
+- Cauchy-Schwarz via polarisation
+  \[
+  df \cdot \gamma' = g(\grad f, \gamma') \geq -\abs{\grad f}^2 - \tfrac{1}{4} \abs{\gamma'}^2
+  \]
+  with equality if and only if $\gamma' = -2\grad f$. Follows from $g(\grad f + \tfrac{1}{2} \gamma', \grad f + \tfrac{1}{2} \gamma') \geq 0$
+- So we need an estimate on
+  \[
+  \partial_t f - \abs{\grad f}^2 - \tfrac{1}{4} \abs{\gamma'}^2 =: Q  - \tfrac{1}{4} \abs{\gamma'}^2
+  \]
+  which is the best we can hope for given equality in Cauchy-Schwartz.
+** Li Yau 1: Harnack Quantity
+- As if by magic:
+  \[
+  Q = \laplace \ln u
+  \]
+- Put $f = \ln u$, $Q = \laplace f$
+- \[
+  \partial_t Q = \partial_t \laplace f = \laplace \partial_t f = \laplace \left(\laplace f + \abs{\nabla f}^2\right)
+  \]
+- Bochner Formula. 
+  \[
+  \partial_t Q = \laplace \laplace f + 2g(\grad f, \grad \laplace f) + 2\abs{\nabla^2 f}^2 + 2 \ric(\nabla f, \nabla f)
+  \]
+- Cauchy Schwartz + $\ric \geq 0$:
+  \[
+  \partial_t Q \geq \laplace Q + 2g(\grad f, \grad Q) + \frac{2}{n} Q^2
+  \]
+** Li-Yau 2: Max principle
+- We have
+  \[
+  \partial_t Q - \laplace Q \geq g(\grad Q, \grad \ln u) + \frac{2}{n} Q^2
+  \]
+- ODE comparison:
+  \[
+  q(t) = -\frac{n}{t}
+  \]
+  satisfies
+#+BEGIN_LaTeX
+  \[
+  \begin{cases}
+  \partial_t q &= -\frac{2}{n} q^2 \\
+  q(0) &= -\infty
+  \end{cases}
+  \]
+#+END_LaTeX
+- Max principle implies $Q \geq - \frac{2}{n} \frac{1}{t}$
+- Li-Yau Harnack
+  \[
+  \partial_t \ln u - \abs{\ln u}^2 \geq - \frac{2}{n} \frac{1}{t}
+  \]
+** Obtaining Moser
+- We reverse the process by integrating Li-Yau Harnack:
+- \[
+  \int \partial_t \ln u - \abs{\ln u}^2 + \frac{1}{4} \int \abs{\gamma'}^2 \geq  \frac{1}{4} \int \abs{\gamma'}^2 - \frac{2}{n} \int \frac{1}{t}
+  \]
+- Or for every $\gamma$:
+  \begin{align*}
+  \ln u(x_2, t_2) - \ln u(x_1, t_2) &\geq \frac{1}{4} \int \abs{\gamma'}^2 - \frac{2}{n} \left(\ln t_2 - \ln t_1\right) \\
+  & \geq \frac{1}{4} \frac{d(x_1, x_2)^2}{t_2 - t_1} + \frac{2}{n} \ln \left(\tfrac{t_2}{t_1}\right)
+  \end{align*}
+- Taking exponentials gives sharp Moser:
+  \[
+  \frac{u(x_2, t_2)}{u(x_1, t_1)} \geq \left(\tfrac{t_2}{t_1}\right)^{n/2} \exp\left(\frac{1}{4} \frac{d(x_1, x_2)^2}{t_2 - t_1}\right)
+  \]
+* Harnack Inequalities: Hypersurface Flows
+** The Harnack Inequality
+** Reparametrisation
+** Proof
+* Ancient Solutions
+** Existence and (lack of) Uniqueness
+** Convex Ancient Solutions are Rare!
+** Classification by Monotone Functions
+** Degree One Homogeneity in the sphere
+** Arbitrary Flows in the Sphere
