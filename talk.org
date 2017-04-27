@@ -74,8 +74,21 @@
   - \(\Delta = \inf_{\gamma} \int_{t_1}^{t_2} \tfrac{1}{F} h(\gamma', \gamma') dt\) for \(F > 0\) and \(\gamma(t_1) = x_1, \gamma(t_2) = x_2\).
   - Replace \(\inf\) by \(\sup\) for \(F < 0\).
 ** Why Care About Harnack inequalities?
-- Regularity: e.g. Moser proved divergence form + measurable coefficients \(\Rightarrow\) \holder{} continuity.
-- Bootstrapping (formally): \(C^{k+1,\beta}\) coefficients \(\Rightarrow\) \(C^{k,\alpha}\) continuity \pause
+- Regularity: e.g. Moser proved divergence form + measurable coefficients \(\Rightarrow\) \holder{} continuity. \pause
+- Bootstrapping: \(C^{k,\beta}\) coefficients \(\Rightarrow\) \(C^{k+1,\alpha}\) continuity.\pause
+  - Heuristic example
+    \[
+    \partial_t u = a u'' + b u' + c u + d
+    \]
+    with \(a,b,c,d \in C^{k,\beta}\) \pause
+  - Evolution of gradient
+    \[
+    \partial_t u' = (\partial_t u)' = a (u')'' + (a' + b) (u')' + (b + c) u' + c' u  + d'
+    \]
+    with \(C^{k-1,\beta}\) coefficients.\pause
+  - Repeat \(k+1\) times to get \(C^{-1,\beta}\) \(\sim\) measurable coefficients.
+  - Therefore \(u^{(k+1)} \in C^{\alpha}\)!
+** Why Care About Harnack inequalities?
 - Singularity analysis: Blow ups of singularities are solitons (sharp case in the Harnack!) \pause
 - Uniform parabolicity: e.g. GCF \(F = K\).\pause
   - \(\kappa_i = 0\) for some \(i\) \(\Rightarrow F = 0, dF = 0 \Rightarrow\) the flow is degenerate parabolic.\pause
@@ -148,7 +161,7 @@ With reparametrisation:
   \]
   where now \(g_t = \varphi_t^{\ast} g\) is time-dependent. \pause
 - Maximum principle completes the proof. \pause
-- Note to compute \((\partial_t - \Delta_{g_t}) \tilde{Q}\) need to compute \([\partial_t, \nabla_{g_t}]\) and \([\partial_t, \Delta_{g_t}]\). \pause
+- Note to compute \((\partial_t - \Delta_{g_t}) \tilde{Q}\) need to compute \([\partial_t, \Delta_{g_t}]\). \pause
 Without reparametrisation:
 - Let \(Q = \partial_t u - |\nabla u|^2 = \Delta Q\). \pause
 - Show
@@ -157,7 +170,36 @@ Without reparametrisation:
   \]\pause
 - This time \([\partial_t, \nabla] = 0\) but need to use Bochner formula for \(\Delta |\nabla u|^2\)
 * Harnack Inequalities for Hypersurface Flows
-** Reparametrisation and Solitons
+** Reparametrisation
+- Same idea of tracking steepest descent works for hypersurface flows: \pause
+  \(\tilde{X}(x, t) = X(\varphi_t(x), t), \quad \partial_t \varphi_t = - \grad_h F (\varphi_t)\).
+  \(\partial_t \tilde{X} = -F(\tilde{W}) \tilde{\nu} - \grad_{\tilde{h}} F(\tilde{W})\). \pause
+  - The speed \(\xi = -F(\tilde{W}) \tilde{\nu} - \grad_{\tilde{h}} F(\tilde{W})\) is a /transverse vector field/.\pause
+- Geometric Properties:
+  - \(\partial_t \nu = 0\) \pause
+  - \(\nabla_t g = 0\) where 
+    \[
+    \nabla_t Z = \bar{\nabla}_{\partial_t \tilde{X}} Z = \bar{\nabla}_Z \xi = -\mathcal{A} (Z)
+    \]
+    is the /affine shape operator/ \(\mathcal{A}: TM \to TM\).
+  - Here \(\bar{\nabla}\) is the ambient Levi-Civita connection. \pause
+- \(\partial_t \nu = 0\) used by Chow to study GCF solitons. \pause
+- Andrews works with the Gauss map parametrisation in Eulidean space:
+  - Fixed normal and fixed metric.
+  - Tremendous simplification of the long calculations of Hamilton and Chow!
+** Solitons
+- \(X(x, t) = \lambda(t) X_0(x)\) with \(N = \RR^{n+1}\).
+- Solves the curvature flow provided \(\ip{\partial_t X}{\nu} = -F(\mathcal{W})\).\pause
+- Then \(\partial_t X = -F\nu - \grad_h F\)
+- Solitons evolve exactly by the reparametrisation! \pause
+- Question: In the reparametrisation, why do we use \(\grad_h F\) and not say \(\grad_g F\)? \pause
+  - Answer one: The evolution of \(F\) depends on \(h\) and we expect it must play a role. Everything works out with \(\grad_h F\) but not \(\grad_g F\) (presumably!)\pause
+  - Answer two: For solitons we have equality:
+    \(Q = \partial_t \ln |F|\)
+    \[
+    \partial_t Q = \Delta Q + T \ast Q + \tfrac{p+1}{p} Q^2
+    \]\pause
+  - Answer three: The normal is static precisely under the reparametrisation.
 ** Harnack Inequalities
 ** Proof
 ** Duality
