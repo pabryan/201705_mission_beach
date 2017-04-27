@@ -78,11 +78,11 @@
 - Bootstrapping: \(C^{k+2}\) coefficients \(\Rightarrow\) \(C^{k,\alpha}\) continuity (morally) \pause
 - Singularity analysis: Blow ups of singularities are solitons (sharp case in the Harnack!) \pause
 - Uniform parabolicity: e.g. GCF \(F = K\).\pause
-  - \(\kappa_i = 0\) for some \(i\) \(\Rightarrow dF = 0 \Rightarrow\) the flow is degenerate parabolic.\pause
+  - \(\kappa_i = 0\) for some \(i\) \(\Rightarrow F = 0, dF = 0 \Rightarrow\) the flow is degenerate parabolic.\pause
   - Upper bounds for the speed are easiest: \(K \leq K_0(t)\).
   - Moser Harnack: \(0 \leq \sup_{x\in M} F(x, t_1) \leq C \inf_{x\in M} F(x, t_2)\)
-  - Therefore, if \(\kappa_i = 0\) at \(t = t_2\), then \(F \equiv 0\), \(t \leq t_2\)! (compare strong maximum principle)\pause
-  - Li-Yau-Hamitlon \(\Rightarrow\) convexity is preserved while the flow is smooth:
+  - Therefore, if \(\kappa_i = 0\) at \(t = t_2\), then \(F \equiv 0\), \(t \leq t_2\) (provided \(C\) bounded!) (compare strong maximum principle)\pause
+  - Li-Yau-Hamilton \(\Rightarrow\) convexity is preserved while the flow is smooth:
     \[
     t^{-p/(p+1)} \partial_t (t^{p/(p+1)}F) = \partial_t F + \frac{p}{p+1} \frac{1}{t} F \geq \frac{1}{F} \abs{\nabla F}_h^2 \geq 0.
     \]
@@ -97,95 +97,66 @@
   \[
   \sqrt{\lambda_k} g(T + \frac{t}{\sqrt{\lambda_k}}) \quad t \in (-\sqrt{\lambda_k} T, 0)
   \]
-  converges to a an ancient solution as \(k \to \infty\). \pause
-  - Harnack inequality \(\Rightarrow\) the ancient solution is a translating soliton.
+  converges to an ancient solution as \(k \to \infty\). \pause
+  - Type II + Harnack inequality \(\Rightarrow\) the ancient solution is a translating soliton.
   
 * Harnack Inequalities: The Heat Equation Revisited
-** Li-Yau from Moser 1
-- Moser Harnack: $\operatorname{osc} u = \sup \abs{u(x_1) - u(x_2)} \leq C d(x_1, x_2)^{\alpha}$ is like a gradient bound:
+** Heat Equation Harnack
+- \(f : M \times [0, T) \to \RR\), \(M\) compact \(\ric > 0\).
+\[
+\partial_t f = \Delta f, \quad f > 0
+\]\pause
+- Let \(u = \ln f\).
+- \(f(x_1, t_1) \leq C f(x_2, t_2)\) iff \(u (x_2, t_2) -  u(x_1, t_1) \geq -\ln C\) \pause
+  #+BEGIN_latex
   \[
-  u(x_2) - u(x_1) = \int_0^1 \partial_s u(\gamma(s)) ds = \int_0^1 g(\grad u, \gamma') ds
+  \begin{split}
+  u(x_2, t_2) - u(x_1, t_1) &= \int_{t_1}^{t_2} \dd{t} \left[u(\gamma(t), t)\right] dt \\
+  &= \int_{t_1}^{t_2} \partial_t u + d u \cdot \gamma'
+  \end{split}
   \]
-  where $\gamma(0) = x_1$, $\gamma(1) = x_2$.
-- $u(x_1, t_1) \leq C u(x_2, t_2)$ iff
+  #+END_latex
+  where \(\gamma(t_1) = x_1\) and \(\gamma(t_2) = x_2\).
+** Heat Equation Harnack
+- Sharpest Harnack - estimate the integrand:
   \[
-  \ln u(x_2, t_2) - \ln u(x_1, t_1) \geq -\ln C
-  \]
-- \[
-  \ln u(x_2, t_2) - \ln u(x_1, t_1) = \int_{t_1}^{t_2} \partial_t \ln u(\gamma(t), t) dt
-  \]
-  where $\gamma(t_1) = x_1$ and $\gamma(t_2) = x_2$.
-- \[
-  \partial_t \ln u(\gamma(t), t) = \partial_t \ln u + d\ln u \cdot \gamma'
-  \]
-  and pointwise estimate will be sharpest!
-** Li Yau from Moser 2: Sharp estimates
-- Separate $\grad \ln u$ and $\gamma'$ parts.
-- Let $f = f$
-- Cauchy-Schwarz via polarisation
+  \partial_t u + du \cdot \gamma' \geq \partial_t u - |\grad u|^2 - \frac{1}{4} |\gamma'|^2
+  \]\pause
+- Equality if and only if \(\gamma' = -2 \grad u\) by polarisation Cauchy-Schwarz:
+  #+BEGIN_latex
   \[
-  df \cdot \gamma' = g(\grad f, \gamma') \geq -\abs{\grad f}^2 - \tfrac{1}{4} \abs{\gamma'}^2
+  \begin{split}
+  0 &\leq g(\grad u + \tfrac{1}{2} \gamma', \grad u + \tfrac{1}{2} \gamma') = g(\grad u, \grad u) + \frac{1}{4} g(\gamma', \gamma') + g(\grad u, \gamma') \\
+  &= g(\grad u, \grad u) + \frac{1}{4} g(\gamma', \gamma') + du (\gamma')
+  \end{split}
   \]
-  with equality if and only if $\gamma' = -2\grad f$. Follows from $g(\grad f + \tfrac{1}{2} \gamma', \grad f + \tfrac{1}{2} \gamma') \geq 0$
-- So we need an estimate on
+  #+END_latex
+  \pause
+- Reparametrise to track steepest descent:
   \[
-  \partial_t f - \abs{\grad f}^2 - \tfrac{1}{4} \abs{\gamma'}^2 =: Q  - \tfrac{1}{4} \abs{\gamma'}^2
-  \]
-  which is the best we can hope for given equality in Cauchy-Schwartz.
-** Li Yau 1: Harnack Quantity
-- As if by magic:
-  \[
-  Q = \laplace \ln u
-  \]
-- Put $f = \ln u$, $Q = \laplace f$
-- \[
-  \partial_t Q = \partial_t \laplace f = \laplace \partial_t f = \laplace \left(\laplace f + \abs{\nabla f}^2\right)
-  \]
-- Bochner Formula. 
-  \[
-  \partial_t Q = \laplace \laplace f + 2g(\grad f, \grad \laplace f) + 2\abs{\nabla^2 f}^2 + 2 \ric(\nabla f, \nabla f)
-  \]
-- Cauchy Schwartz + $\ric \geq 0$:
-  \[
-  \partial_t Q \geq \laplace Q + 2g(\grad f, \grad Q) + \frac{2}{n} Q^2
-  \]
-** Li-Yau 2: Max principle
-- We have
-  \[
-  \partial_t Q - \laplace Q \geq g(\grad Q, \grad \ln u) + \frac{2}{n} Q^2
-  \]
-- ODE comparison:
-  \[
-  q(t) = -\frac{n}{t}
-  \]
-  satisfies
-#+BEGIN_LaTeX
-  \[
-  \begin{cases}
-  \partial_t q &= -\frac{2}{n} q^2 \\
-  q(0) &= -\infty
-  \end{cases}
-  \]
-#+END_LaTeX
-- Max principle implies $Q \geq - \frac{2}{n} \frac{1}{t}$
+  \tilde{u}(x, t) = u(\varphi_t(x), t), \quad \partial_t \varphi_t = - 2 \grad u(\varphi_t)
+  \]\pause
 - Li-Yau Harnack
   \[
-  \partial_t \ln u - \abs{\ln u}^2 \geq - \frac{2}{n} \frac{1}{t}
+  \partial_t \tilde{u} \geq -\frac{n}{2} \frac{1}{t}
   \]
-** Obtaining Moser
-- We reverse the process by integrating Li-Yau Harnack:
-- \[
-  \int \partial_t \ln u - \abs{\ln u}^2 + \frac{1}{4} \int \abs{\gamma'}^2 \geq  \frac{1}{4} \int \abs{\gamma'}^2 - \frac{2}{n} \int \frac{1}{t}
-  \]
-- Or for every $\gamma$:
-  \begin{align*}
-  \ln u(x_2, t_2) - \ln u(x_1, t_2) &\geq \frac{1}{4} \int \abs{\gamma'}^2 - \frac{2}{n} \left(\ln t_2 - \ln t_1\right) \\
-  & \geq \frac{1}{4} \frac{d(x_1, x_2)^2}{t_2 - t_1} + \frac{2}{n} \ln \left(\tfrac{t_2}{t_1}\right)
-  \end{align*}
-- Taking exponentials gives sharp Moser:
+** Proving Li-Yau
+With reparametrisation:
+- Let \(\tilde{Q} = \partial_t \tilde{u}\)
+- Show
   \[
-  \frac{u(x_2, t_2)}{u(x_1, t_1)} \geq \left(\tfrac{t_2}{t_1}\right)^{n/2} \exp\left(\frac{1}{4} \frac{d(x_1, x_2)^2}{t_2 - t_1}\right)
+  \partial_t \tilde{Q} \geq \Delta_{g_t} \tilde{Q} + g_t(\nabla \tilde{Q}, \nabla \tilde{u}) + \tfrac{2}{n} \tilde{Q}^2
   \]
+  where now \(g_t = \varphi_t^{\ast} g\) is time-dependent. \pause
+- Maximum principle completes the proof. \pause
+- Note to compute \((\partial_t - \Delta_{g_t}) \tilde{Q}\) need to compute \([\partial_t, \nabla_{g_t}]\) and \([\partial_t, \Delta_{g_t}]\). \pause
+Without reparametrisation:
+- Let \(Q = \partial_t u - |\nabla u|^2 = \Delta Q\). \pause
+- Show
+  \[
+  \partial_t Q \geq \Delta Q + g (\nabla Q, \nabla \tilde{u}) + \tfrac{2}{n} Q^2
+  \]\pause
+- This time \([\partial_t, \nabla] = 0\) but need to use Bochner formula for \(\Delta |\nabla u|^2\)
 * Harnack Inequalities: Hypersurface Flows
 ** The Harnack Inequality
 ** Reparametrisation
