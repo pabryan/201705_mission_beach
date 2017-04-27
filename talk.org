@@ -14,16 +14,16 @@
 
 #+LaTeX_HEADER: \input{local_definitions}
 
-* Introduction
+* Hypersurface Flows
 ** Hypersurface Flows
-- \((N^{n+1}, \bar{g})\) = Riemmanian or Lorentzian Manifold.
+- \((N^{n+1}, \bar{g})\) = Riemannian or Lorentzian Manifold.
 - \(M^n\) = compact manifold (except in Minkowski space - more later)\pause
 - \(M_t = X_t(M)\) is smooth family of embedded hypersurfaces where \(X_t : M \to N\) satisfies
   \[
   \partial_t X_t = -F(\mathcal{W}_t) \nu_t
   \]
   \pause
-  - \(\mathcal{W}_t\) = Weingarten, \(\nu_t\) = Unit Normal.
+  - \(\mathcal{W}_t\) = Weingarten extrinsic curvature, \(\nu_t\) = Unit Normal.
   - \(F\) = /curvature function/ = smooth, symmetric function of principal curvatures (geometric flow), increasing in each argument (parabolic).\pause
 - Assumption: \(M_t\) is /spacelike/: induced metric \(g_t = X_t^{\ast} \bar{g} > 0\). \pause
 - Assumption: strict convexity: 
@@ -47,27 +47,27 @@
 - For Harnack inequalities (and many other results!) need to assume either
   - \(f\) is convex,
   - \(f\) is concave,
-  - \(f\) is inverse concave (i.e. \(\mathcal{W} \mapsto 1/f(\mathcal{W}^{-1})\) is concave. 
-  - \(f = f_1^p\) where \(f_1\) is \(1\)-homogeneous.
+  - \(f\) is inverse concave (i.e. \(\mathcal{W} \mapsto 1/f(\mathcal{W}^{-1})\) is concave) or inverse convex.
+  - \(f = \operatorname{sgn}(p) f_1^p\) where \(f_1\) is \(1\)-homogeneous.
    \pause
 - Remark from classical invariant theory:
   - A theorem of Weyl says any polynomial function of \(\mathcal{W}\) invariant under change of coordinates must be a polynomial in \(\sigma_k\). Trace is the only invariant, linear polynomial, etc.
   - Approximating smooth \(F\) by polynomials \(\Rightarrow\) only invariant smooth functions are of the form \(f(\sigma_1, \cdots, \sigma_n)\).
+* Review of Harnack Inequalities and Ancient Solutions
 ** Li-Yau-Hamilton and Moser Harnack Inequality
-- Li-Yau-Hamilton (Andrews in this context!):
-  - Let \(u = \partial_t \ln \abs{F}\).
+- Li-Yau-Hamilton (Andrews in this context!): \pause
+  - The speed \(F\) evolves by a scalar parabolic equation.\pause
+  - Let \(u = \partial_t \ln \abs{F} = \tfrac{\partial_t F}{F}\).
     \[
     \partial_t u - \abs{\nabla u}_h^2 \geq -\frac{p}{p+1} \frac{1}{t}
     \]\pause
-  - \(\abs{\nabla u}_h^2 = h(\grad_h u, \grad_h u)\) where \(du(X) = h(\grad_h u, X)\) defines the gradient of \(u\) w.r.t. \(h\).
-  - \(p\) = homogeneity degree  \pause
+  - \(\abs{\nabla u}_h^2 = h(\grad_h u, \grad_h u)\) where \(du(X) = h(\grad_h u, X)\) defines the gradient of \(u\) w.r.t. \(h\). \pause
 - Moser:
   \[
   F(x_1, t_1) \leq C(x_1, x_2, t_1, t_2) F(x_2, t_2)
   \]
   with \(0 < t_1 < t_2\). \pause
-- Li-Yau-Hamilton \(\Leftrightarrow\) Moser by integrating over space-time paths. \pause
-- Li-Yau-Hamilton produces sharpest \(C\):
+- Li-Yau-Hamilton \(\Leftrightarrow\) Moser by integrating over space-time paths (sharpest C):
   \[
   C = \left(\frac{t_2}{t_1}\right)^{\tfrac{p}{p+1}} e^{\Delta/4}
   \]
@@ -75,17 +75,17 @@
   - Replace \(\inf\) by \(\sup\) for \(F < 0\).
 ** Why Care About Harnack inequalities?
 - Regularity: e.g. Moser proved divergence form + measurable coefficients \(\Rightarrow\) \holder{} continuity.
-- Bootstrapping: \(C^{k+2}\) coefficients \(\Rightarrow\) \(C^{k,\alpha}\) continuity (morally) \pause
+- Bootstrapping (formally): \(C^{k+1,\beta}\) coefficients \(\Rightarrow\) \(C^{k,\alpha}\) continuity \pause
 - Singularity analysis: Blow ups of singularities are solitons (sharp case in the Harnack!) \pause
 - Uniform parabolicity: e.g. GCF \(F = K\).\pause
   - \(\kappa_i = 0\) for some \(i\) \(\Rightarrow F = 0, dF = 0 \Rightarrow\) the flow is degenerate parabolic.\pause
-  - Upper bounds for the speed are easiest: \(K \leq K_0(t)\).
+  - Upper bounds for the speed are easiest: \(K \leq K_0(t)\) (Tso)\pause.
   - Moser Harnack: \(0 \leq \sup_{x\in M} F(x, t_1) \leq C \inf_{x\in M} F(x, t_2)\)
   - Therefore, if \(\kappa_i = 0\) at \(t = t_2\), then \(F \equiv 0\), \(t \leq t_2\) (provided \(C\) bounded!) (compare strong maximum principle)\pause
   - Li-Yau-Hamilton \(\Rightarrow\) convexity is preserved while the flow is smooth:
     \[
     t^{-p/(p+1)} \partial_t (t^{p/(p+1)}F) = \partial_t F + \frac{p}{p+1} \frac{1}{t} F \geq \frac{1}{F} \abs{\nabla F}_h^2 \geq 0.
-    \]
+    \]\pause
     - Therefore \(t^{p/(p+1)}F\) is increasing and so \(F(\cdot, 0) > 0 \Rightarrow F(\cdot, t) > 0\).
 ** Why Care About Ancient Solutions?
 - Ancient solutions exist for \(t \in (-\infty, T)\).\pause
@@ -100,7 +100,6 @@
   converges to an ancient solution as \(k \to \infty\). \pause
   - Type II + Harnack inequality \(\Rightarrow\) the ancient solution is a translating soliton.
   
-* Harnack Inequalities: The Heat Equation Revisited
 ** Heat Equation Harnack
 - \(f : M \times [0, T) \to \RR\), \(M\) compact \(\ric > 0\).
 \[
@@ -134,7 +133,7 @@
   \pause
 - Reparametrise to track steepest descent:
   \[
-  \tilde{u}(x, t) = u(\varphi_t(x), t), \quad \partial_t \varphi_t = - 2 \grad u(\varphi_t)
+  \tilde{u}(x, t) = u(\varphi_t(x), t), \quad \partial_t \varphi_t = - \grad u(\varphi_t)
   \]\pause
 - Li-Yau Harnack
   \[
@@ -142,7 +141,7 @@
   \]
 ** Proving Li-Yau
 With reparametrisation:
-- Let \(\tilde{Q} = \partial_t \tilde{u}\)
+- Let \(\tilde{Q} = \partial_t \tilde{u} = \Delta_{g_t} \tilde{u}\)
 - Show
   \[
   \partial_t \tilde{Q} \geq \Delta_{g_t} \tilde{Q} + g_t(\nabla \tilde{Q}, \nabla \tilde{u}) + \tfrac{2}{n} \tilde{Q}^2
@@ -157,11 +156,12 @@ Without reparametrisation:
   \partial_t Q \geq \Delta Q + g (\nabla Q, \nabla \tilde{u}) + \tfrac{2}{n} Q^2
   \]\pause
 - This time \([\partial_t, \nabla] = 0\) but need to use Bochner formula for \(\Delta |\nabla u|^2\)
-* Harnack Inequalities: Hypersurface Flows
-** The Harnack Inequality
-** Reparametrisation
+* Harnack Inequalities for Hypersurface Flows
+** Reparametrisation and Solitons
+** Harnack Inequalities
 ** Proof
-* Ancient Solutions
+** Duality
+* Ancient Solutions of  Hypersurface Flows
 ** Existence and (lack of) Uniqueness
 ** Convex Ancient Solutions are Rare!
 ** Classification by Monotone Functions
