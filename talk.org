@@ -111,7 +111,7 @@
   \[
   \begin{split}
   u(x_2, t_2) - u(x_1, t_1) &= \int_{t_1}^{t_2} \dd{t} \left[u(\gamma(t), t)\right] dt \\
-  &= \int_{t_1}^{t_2} \partial_t u + d u \cdot \gamma'
+  &= \int_{t_1}^{t_2} \partial_t u + du(\gamma') dt
   \end{split}
   \]
   #+END_latex
@@ -119,19 +119,19 @@
 ** Heat Equation Harnack
 - Sharpest Harnack - estimate the integrand:
   \[
-  \partial_t u + du \cdot \gamma' \geq \partial_t u - |\grad u|^2 - \frac{1}{4} |\gamma'|^2
+  \partial_t u + du (\gamma') \geq \partial_t u - |\grad u|^2 - \frac{1}{4} |\gamma'|^2
   \]\pause
 - Equality if and only if \(\gamma' = -2 \grad u\) by polarisation Cauchy-Schwarz:
   #+BEGIN_latex
   \[
   \begin{split}
-  0 &\leq g(\grad u + \tfrac{1}{2} \gamma', \grad u + \tfrac{1}{2} \gamma') = g(\grad u, \grad u) + \frac{1}{4} g(\gamma', \gamma') + g(\grad u, \gamma') \\
+  0 &\leq g(\grad u + \tfrac{1}{2} \gamma', \grad u + \tfrac{1}{2} \gamma') \\
   &= g(\grad u, \grad u) + \frac{1}{4} g(\gamma', \gamma') + du (\gamma')
   \end{split}
   \]
   #+END_latex
   \pause
-- Reparametrise to track steepest descent:
+- IDEA: Reparametrise to track steepest descent.
   \[
   \tilde{u}(x, t) = u(\varphi_t(x), t), \quad \partial_t \varphi_t = - \grad u(\varphi_t)
   \]\pause
@@ -178,7 +178,7 @@ Without reparametrisation:
 - \(X(x, t) = \lambda(t) X_0(x)\) with \(N = \RR^{n+1}\).
 - Solves the curvature flow provided \(\ip{\partial_t X}{\nu} = -F(\mathcal{W})\).\pause
 - Then \(\partial_t X = -F\nu - \grad_h F\)
-- Solitons evolve exactly by the reparametrisation! \pause
+  - Solitons evolve exactly by the reparametrisation! \pause
 - Question: In the reparametrisation, why do we use \(\grad_h F\) and not say \(\grad_g F\)? \pause
   - Answer one: The evolution of \(F\) depends on \(h\) and we expect it must play a role. Everything works out with \(\grad_h F\) but not \(\grad_g F\) (presumably!)\pause
   - Answer two: For solitons we have equality:
@@ -192,6 +192,7 @@ Without reparametrisation:
 - No compact, spacelike hypersurfaces in Minkowski space \(\RR^{n,1}\).
   - Take \(M\) co-compact via a group \(G\) of future-preserving isometries. \pause
 - Let \(X_t\) solves the /standard flow/ \(\partial_t X= -\sigma F(\mathcal{W}) \nu\)
+  - \(\sigma = +1\) in Riemannian case, \(\sigma = - 1\) in Lorentzian case.
 - \(F = \operatorname{sgn}(p) f^p\) with \(-1 < p\) and \(f\) inverse concave or \(-1 > p\) and \(f\) inverse convex. \pause
 \begin{theorem}
 \[
@@ -199,11 +200,12 @@ Without reparametrisation:
 \]
 \end{theorem}\pause
 - New Harnack: Minkwoski space, and quotients (even of Euclidean space).
-** Anisotropic Flows and Background Curvature
+** Anisotropic Flows
 - Can allow anisotropic factors: \(F = \psi(s) \varphi(\nu) \operatorname{sgn} (p) f^p\) \pause
   - \(\varphi: \sphere^n \to \RR\) in Euclidean space
   - \(\varphi: \HH^n \to \RR\) in Minkowski space invariant under \(G\)
-  - \(\psi(s)\) a function of the support function \(s = \pm \ip{x}{\nu}\) (some extra conditions required) \pause
+  - \(\psi(s)\) a function of the support function \(s = \pm \ip{x}{\nu}\) (some extra conditions required) (new apart from Ivaki-Stancu - centro-affine flows) \pause
+** With Background Curvature
 - Positively curved spaceforms (Sphere, de Sitter and quotients theroef)
   - Need \(F = f^p\) with \(f\) convex and \(0 < p \leq 1\) (also \(0 < \kappa_i \leq 1\) in Lorentzian case) \pause
 - Locally symmetric, Einstein manifolds of non-negative sectional curvature (e.g. \(\mathbb{CP}^n\), finite quotients of compact type, irreducible symmetric spaces give non-constant sectional curvature examples).\pause
@@ -215,21 +217,24 @@ Without reparametrisation:
   - Bonus term: \(\bar{R}\) = scalar curvature = constant (since Einstein + locally symmetric \(\nabla \overline{Rm} \equiv 0\))
 ** Proof
 - Key Properties:
-  - Time derivative is tangent: \(A(X) = D_t X = D_X (-f \nu - \grad_h f) = f\mathcal{W} (X) + \nabla_X \grad_h f\)
+  - Time derivative is tangent:
+    \[
+     A(X) = D_t X = D_X (-f \nu - \grad_h f) = f\mathcal{W} (X) + \nabla_X \grad_h f
+    \] \pause
   - Fixed normal: \(\nabla_t \nu = 0\)
   - Fixed metric: \(\nabla_t g = 0\) \pause
 - Affine fundamental form
-  - \(\tilde{g}(X, Y) = \frac{1}{F} h(X, Y)\)
-  - Define: \(B(X, Y) = \tilde{g}(A(X), Y)\) (not symmetric in non-flat spaces!)
-  - Define: \(\Lambda(X, Y) = \Rm(\partial_t X_t, X, \nu, Y)\)
+  - \(\tilde{g}(X, Y) = \frac{1}{F} h(X, Y) = \frac{1}{F} g(\mathcal{W}(X), Y)\)
+  - \(B(X, Y) = \tilde{g}(A(X), Y)\) (not symmetric in non-flat spaces since \([A, \mathcal{W}] \ne 0\)) \pause
+  - \(\Lambda(X, Y) = \Rm(\partial_t X_t, X, \nu, Y)\)
   - \(B(X, Y) - B(Y, X) = \frac{1}{f}\left(\Lambda(X, Y) - \Lambda(Y, X)\right)\) \pause
+  - Remember \(\partial_t X_t\) is not normal so \(\Lambda\) is not the curvature operator! \pause
 - Evolution
   - \(\nabla_t h = B + \Lambda\)
-  - Remember \(\partial_t X_t\) is not normal so \(\Lambda\) is not sectional curvature!
 ** Proof
 - Main Equation
   \[
-  \partial_t u \geq \Box_{F} u + T \ast \nabla u + \frac{p+1}{p} u^2 + \text{Remainder} (\Rm, \nabla \Rm)
+  \partial_t u \geq \Box_{F} u + T \ast \nabla u + \frac{p+1}{p} u^2 + \text{Remainder} (dF \ast \Rm, dF \ast \nabla \Rm)
   \]
   where \(\Box_F u = dF(\nabla^2 u) = \dot{F}^{ij} \nabla^2_{ij} u\) \pause
 - Harnack follows by maximum principle
@@ -240,7 +245,7 @@ Without reparametrisation:
   - comes from convexity/concavity and homogeneity assumptions \pause
 - Without convexity/concavity and homogeneity assumptions
   \[
-  \partial_t u \geq \Box_{F} u + T \ast \nabla u + \text{Remainder} (\Rm, \nabla \Rm)
+  \partial_t u \geq \Box_{F} u + T \ast \nabla u + \text{Remainder} (dF \ast \Rm, dF \ast \nabla \Rm)
   \]
   - \(\inf u = \inf \tfrac{\partial_t f}{f}\) is increasing
 ** Main Restrictions:
