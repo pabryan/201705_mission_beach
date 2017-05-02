@@ -31,6 +31,22 @@
   h(X, X) := g(\mathcal{W}(X), X) > 0 \quad \forall X \ne 0 \in TM \Leftrightarrow \kappa_i > 0.
   \]\pause
 - Assumption: \(\abs{F} > 0\) for \(\kappa_i > 0\).
+** Harnack Inequality
+- The flow \(X_t\) is fully-nonlinear
+  - Compare Scalar Monge-Ampere. Harnack for /linearised/ equation! \pause
+- Why do we get Harnack for fully non-linear curvature flows? \pause
+- The /speed function/ \(v(x, t) = \bar{g}(\partial_t X, \nu) = -F(\mathcal{W}(x, t)\) satisfies the equation
+  \[
+  \partial_t v = \Box_F v + \cdots
+  \]
+  where \(\Box_F\) is the /linearised operator/ \(\Box_F v = dF(\nabla^2 v) = \dot{F}^{ij} \nabla^2_{ij} v\). \pause
+
+\begin{theorem}
+\[
+\partial_t F - \abs{\nabla F}_h^2 + \frac{p}{p+1} \frac{F}{t} \geq 0.
+\]
+\end{theorem}
+
 ** Examples of Hypersurface Flows
 - Mean Curvature Flow: \(F(\mathcal{W}) = H = \Tr(\mathcal{W}) = \kappa_1 + \cdots + \kappa_n\).
 - Inverse Mean Curvature Flow: \(F(\mathcal{W}) = -H^{-1} = - \Tr(\mathcal{W})^{-1} = -\frac{1}{\kappa_1 + \cdots + \kappa_n}\).
@@ -223,6 +239,7 @@ Without reparametrisation:
     \] \pause
   - Fixed normal: \(\nabla_t \nu = 0\)
   - Fixed metric: \(\nabla_t g = 0\) \pause
+  - Don't need to compute \([\nabla_t, \nabla]\)!
 - Affine fundamental form
   - \(\tilde{g}(X, Y) = \frac{1}{F} h(X, Y) = \frac{1}{F} g(\mathcal{W}(X), Y)\)
   - \(B(X, Y) = \tilde{g}(A(X), Y)\) (not symmetric in non-flat spaces since \([A, \mathcal{W}] \ne 0\)) \pause
