@@ -93,6 +93,7 @@
 - Regularity: e.g. Moser proved divergence form + measurable coefficients \(\Rightarrow\) \holder{} continuity. \pause
 - Bootstrapping: \(C^{k,\beta}\) coefficients \(\Rightarrow\) \(C^{k+1,\alpha}\) continuity.\pause
 - Singularity analysis: Blow ups of singularities are solitons (sharp case in the Harnack!) \pause
+** Why Care About Harnack Inequalities
 - Uniform parabolicity: e.g. GCF: \(F = K\).\pause
   - \(\kappa_i = 0\) for some \(i\) \(\Rightarrow F = 0, dF = 0 \Rightarrow\) the flow is degenerate parabolic.\pause
   - Upper bounds for the speed are easiest: \(K \leq K_0(t)\) (Tso)\pause.
@@ -178,6 +179,7 @@ Without reparametrisation:
   \(\tilde{X}(x, t) = X(\varphi_t(x), t), \quad \partial_t \varphi_t = - \grad_h F (\varphi_t)\).
   \(\partial_t \tilde{X} = -F(\tilde{W}) \tilde{\nu} - \grad_{\tilde{h}} F(\tilde{W})\). \pause
   - The speed \(\xi = -F(\tilde{W}) \tilde{\nu} - \grad_{\tilde{h}} F(\tilde{W})\) is a /transverse vector field/.\pause
+  - Flow is diffeomorphism invariant - reparametrisation is a choice of Gauge! \pause
 - Geometric Properties:
   - \(\partial_t \nu = 0\) \pause
   - \(\nabla_t g = 0\) where 
@@ -275,9 +277,3 @@ Without reparametrisation:
   - But for spaceforms tangential part disappears in a contraction! \pause
   - For MCF, \(dF = \id \Rightarrow\) Contracting \(\Rm\) with \(dF\) gives background Ricci. \pause
   - Otherwise we get contractions of background curvature with varying tangential tensor \(dF\) is effectively uncontrollable.
-* Ancient Solutions of  Hypersurface Flows
-** Existence and (lack of) Uniqueness
-** Convex Ancient Solutions are Rare!
-** Classification by Monotone Functions
-** Degree One Homogeneity in the sphere
-** Arbitrary Flows in the Sphere
